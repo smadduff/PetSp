@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+  
+  {% if productos %}
+    <div class="container-fluid">
+      <div class="row">
+        {% for producto in productos %}
+          <div class="card col-sm-12 col-md-6 col-lg-3 col-xl-2 border border-1 m-2 pt-3 pb-4" style="width: 15.2rem;">
+            <a href="{% url 'ficha' producto.id %}" class="link-bloque">
+              <img src="/media/{{ producto.imagen }}" class="index-producto-imagen" class="card-img-top" alt="">
+              <div class="card-body">
+                <h6 class="card-title">
+                  {{ producto.nombre }}
+                </h6>
+                <h7 class="card-title"> 
+                  {{ producto.html_estado|safe }}
+                  <br>
+                  {{ producto.html_precio|safe }}
+                </h7>
+                <p class="card-text index-producto-descripcion" data-toggle="tooltip" title="{{ descripcion_producto }}"> 
+                  {{ producto.descripcion }}
+                  <br>
+                  {{ producto.html_stock }}
+                </p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <h2>No se encontraron productos</h2>
+  {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,88 @@
+h1 {
+    color: blue !important;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+.logo-menu-superior {
+    height: 40px;
+}
+
+.link-bloque {
+    display: inline-block; /* Mostrar como bloque en línea */
+    text-decoration: none !important; /* Eliminar subrayado del enlace */
+    color: inherit; /* Heredar el color del texto */
+    text-decoration: lin;
+}
+  
+.link-bloque:hover {
+    /* Estilos adicionales al pasar el mouse sobre el enlace */
+    cursor: pointer;
+    border: 1px solid lightblue;
+}
+
+.error-message {
+    color: red !important;
+    font-weight: bold !important;
+}
+
+th {
+    vertical-align: top;
+    background-color: lightgray !important;
+}
+
+.table-hover .letra-boleta-anulada td {
+    color: red !important;
+    font-weight: bold !important;
+}
+  
+.producto-sm {
+    width:  82px;
+    height: 70px;
+}
+
+.index-producto-imagen {
+    max-width:  165px;
+    /* max-height: 139px; */
+}
+
+.index-producto-descripcion {
+    width: 200px; /* Ancho fijo para el contenedor */
+    white-space: nowrap; /* Evita que el texto se desborde */
+    overflow: hidden; /* Oculta el texto que se desborda */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) */
+}
+
+.index-card-footer {
+    background-color: transparent;
+    border-top: none;
+}
+
+#admin-producto-imagen {
+    max-width: 350px;
+    max-height: 350px;
+    padding: 3px;
+    border: 2px solid gray;
+}
+
+#admin-bodega-imagen {
+    max-width: 150px;
+    max-height: 150px;
+    padding: 3px;
+    border: 2px solid gray;
+}
+
+#registrarme-imagen {
+    max-width: 150px;
+    max-height: 150px;
+    padding: 3px;
+    border: 2px solid gray;
+}
+  
+.ancho-150px {
+    width: 150px;
+}
+
+/* div {
+    border: 1px solid blue;
+} */
