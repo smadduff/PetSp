@@ -14,3 +14,18 @@ def registrar_carrito(request):
         'mostrar_carrito': mostrar_carrito,
         'cantidad_productos': cantidad_productos,
     }
+
+def carrito_variables(request):
+    detalle_carrito = Carrito.objects.filter(cliente=request.user.perfil)
+    total_a_pagar = 0
+    for item in detalle_carrito:
+        total_a_pagar += item.precio_a_pagar
+    monto_sin_iva = int(round(total_a_pagar / 1.19))
+    iva = total_a_pagar - monto_sin_iva
+
+    return {
+        'detalle_carrito': detalle_carrito,
+        'monto_sin_iva': monto_sin_iva,
+        'iva': iva,
+        'total_a_pagar': total_a_pagar,
+    }

@@ -12,6 +12,7 @@ def formatear_numero(value):
 
 @register.filter
 def formatear_dinero(value):
+    
     value = round(value)
     value = f'${value:,}'
     value = value.replace(',', '.')

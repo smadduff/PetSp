@@ -233,12 +233,13 @@ def carrito(request):
     monto_sin_iva = int(round(total_a_pagar / 1.19))
     iva = total_a_pagar - monto_sin_iva
 
-    return render(request, 'core/carrito.html', {
+    context = {
         'detalle_carrito': detalle_carrito,
         'monto_sin_iva': monto_sin_iva,
         'iva': iva,
         'total_a_pagar': total_a_pagar,
-    })
+    }
+    return render(request, 'core/carrito.html', context)
 
 
 def eliminar_producto_en_carrito(request, carrito_id):
