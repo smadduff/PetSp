@@ -17,9 +17,10 @@
     {% block stylesheet %}
       
     {% endblock stylesheet %}
-
+    
 </head>
 <body>
+  
     {% block navbar %}
 
       <nav class="navbar navbar-expand-lg text-bg-dark p-3">
@@ -177,7 +178,7 @@
             <td> {{ item.precio_a_pagar|formatear_dinero }} </td>
             <td> <div class="btn-group">
               <a href="{% url 'ficha' item.producto.id %}" class="btn btn-sm btn-primary"> Detalle </a> 
-              <a href="{% url 'eliminar_producto_en_carrito' item.id %}" class="btn btn-sm btn-danger"> Eliminar </a> 
+              <a href="#" onclick="eliminar_producto_en_carrito({{ item.id }})" class="btn btn-sm btn-danger"> Eliminar </a> 
           </div></td>
           </tr>
           {% endfor %}
@@ -262,6 +263,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="{% static 'core/js/script.js' %}"></script>
     <script src="{% static 'core/js/script-carrito.js' %}"></script>
+    <script src="{% static 'core/js/script-eliminar.js' %}"></script>
     {% block script %}
         
     {% endblock script %}
