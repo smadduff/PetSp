@@ -25,9 +25,11 @@ $(document).ready(function() {
             },
             'nombre': {
                 required: true,
+                minlength: 3,
             },
             'descripcion': {
                 required: true,
+                minlength: 5,
             },
             'precio': {
                 required: true,
@@ -51,30 +53,32 @@ $(document).ready(function() {
         },
         messages: {
             'categoria': {
-                required: 'Debe ingresar la categoría del producto',
+                required: 'El campo categoria es obligatorio',
             },
             'nombre': {
-                required: 'Debe ingresar el nombre del producto',
+                required: "El campo nombre es obligatorio",
+                minlength: "Debe contener al menos 3 caracteres",
             },
             'descripcion': {
-                required: 'Debe ingresar la descripción del producto',
+                required: "El campo descripcion es obligatorio",
+                minlength: "Debe contener una descripción",
             },
             'precio': {
-                required: 'Debe ingresar el precio del producto',
-                number: 'Debe ingresar un número',
-                digits: 'Debe ingresar un número entero',
+                required: 'El campo precio es obligatorio',
+                number: 'Este campo solo acepta números',
+                digits: 'El numero ingresado debe ser número entero',
             },
             'descuento_subscriptor': {
-                required: 'Debe ingresar el % de descuento para subscriptores',
+                required: 'El campo es obligatorio debe ingresar el porcentaje de descuento para subscriptores',
                 number: 'Debe ingresar un número',
                 digits: 'Debe ingresar un número entero',
-                range: 'El descuento debe ser un número entre 0 y 100',
+                range: 'El descuento debe al menos 0 y como maximo 100',
             },
             'descuento_oferta': {
-                required: 'Debe ingresar el % de descuento para ofertas',
+                required: 'El campo es obligatorio debe ingresar el porcentaje de descuento para oferta',
                 number: 'Debe ingresar un número',
                 digits: 'Debe ingresar un número entero',
-                range: 'El descuento debe ser un número entre 0 y 100',
+                range: 'El descuento debe al menos 0 y como maximo 100',
             },
         },
         errorPlacement: function(error, element) {

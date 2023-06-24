@@ -12,8 +12,7 @@ form_file = {'class': 'form-control-file', 'title': 'Debe subir una imagen'}
 form_check = {'class': 'form-check-input'}
 form_password = {'class': 'form-control text-danger', 'value': '123'}
 
-class ProductoForm(ModelForm):
-
+class ProductoForm(ModelForm): 
     class Meta:
         model = Producto
         fields = '__all__'
