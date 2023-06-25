@@ -1,13 +1,46 @@
 {% extends 'core/base.html' %}
 
-{% load static %}
-
-{% block stylesheet %}
-    
-{% endblock stylesheet %}
-
 {% block content %}
-    
-    <h1>Mantenedor de usuarios</h1>
-    
-{% endblock content %}
+  <div id="menuAdmin"></div>
+  <div class="row m-lg-1"><h1>Mantenedor usuarios</h1></div>
+  <form class="text-start p-4" id="formMantUser" method="post">
+    <!-- Resto del formulario -->
+  </form>
+
+  <div class="table-responsive-sm table-responsive-md table-responsive-lg">
+    <table class="table-sm table align-middle">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tipo Usuario</th>
+          <th scope="col">Rut</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Subscrito</th>
+          <th scope="col">Imagen</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for perfil in perfiles %}
+        <tr>
+          <th scope="row">{{ perfil.usuario.id }}</th>
+          <td>{{ perfil.tipo_usuario }}</td>
+          <td>{{ perfil.rut }}</td>
+          <td>{{ perfil.usuario.first_name }}</td>  
+          <td>{{ perfil.usuario.last_name }}</td>
+          <td>{{ perfil.usuario.email }}</td>
+          <td>{{ perfil.direccion }}</td>
+          <td>{{ perfil.subscrito }}</td>
+          <td><img src="{{ perfil.imagen.url }}" alt="Imagen de perfil"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="footer"></div>
+
+  <!-- Scripts y enlaces a CSS -->
+{% endblock %}

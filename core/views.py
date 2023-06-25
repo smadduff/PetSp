@@ -11,6 +11,9 @@ from django.contrib import messages
 from .tools import eliminar_registro, verificar_eliminar_registro
 from core.templatetags.custom_filters import formatear_dinero, formatear_numero
 from django.http import HttpResponse
+from .models import Perfil
+from .forms import PerfilForm
+
 
 def index(request):
 
@@ -387,3 +390,21 @@ def premio(request):
 def poblar(request):
     poblar_bd()
     return redirect(index)
+
+
+
+
+
+
+
+def mantenedor_usuarios(request):
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PerfilForm()
+
+    perfiles = Perfil.objects.all()
+    return render(request, 'core/template/admin_usuario.html', {'form': form, 'perfiles': perfiles})
+

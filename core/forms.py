@@ -12,7 +12,7 @@ form_file = {'class': 'form-control-file', 'title': 'Debe subir una imagen'}
 form_check = {'class': 'form-check-input'}
 form_password = {'class': 'form-control text-danger', 'value': '123'}
 
-class ProductoForm(ModelForm): 
+class ProductoForm(ModelForm):    
     class Meta:
         model = Producto
         fields = '__all__'
@@ -24,6 +24,28 @@ class ProductoForm(ModelForm):
             'precio': forms.NumberInput(attrs=form_control),
             'descuento_subscriptor': forms.NumberInput(attrs=form_control),
             'descuento_oferta': forms.NumberInput(attrs=form_control),
+            'imagen': forms.FileInput(attrs=form_file),
+        }
+
+from django import forms
+from .models import Perfil
+
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = '__all__'
+
+        form_select = {'class': 'form-select'}
+        form_control = {'class': 'form-control'}
+        form_text_area = {'class': 'form-control', 'rows': 3}
+        form_file = {'class': 'form-control-file'}
+
+        widgets = {
+            'usuario': forms.Select(attrs=form_select),
+            'tipo_usuario': forms.Select(attrs=form_select),
+            'rut': forms.TextInput(attrs=form_control),
+            'direccion': forms.TextInput(attrs=form_control),
+            'subscrito': forms.CheckboxInput(),
             'imagen': forms.FileInput(attrs=form_file),
         }
 
