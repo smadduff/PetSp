@@ -15,6 +15,8 @@ from .models import Perfil
 from .forms import PerfilForm
 
 
+
+
 def index(request):
 
     if request.method == 'POST':
@@ -57,8 +59,7 @@ def nosotros(request):
     return render(request, 'core/nosotros.html')
 
 
-def admin_usuarios(request):
-    return render(request, 'core/admin_usuarios.html')
+
 
 
 def admin_bodega(request):
@@ -393,11 +394,7 @@ def poblar(request):
 
 
 
-
-
-
-
-def mantenedor_usuarios(request):
+def admin_usuarios(request):
     if request.method == 'POST':
         form = PerfilForm(request.POST, request.FILES)
         if form.is_valid():
@@ -406,5 +403,6 @@ def mantenedor_usuarios(request):
         form = PerfilForm()
 
     perfiles = Perfil.objects.all()
-    return render(request, 'core/template/admin_usuario.html', {'form': form, 'perfiles': perfiles})
+    print(perfiles)  # Add this print statement
 
+    return render(request, 'core/admin_usuarios.html', {'perfiles': perfiles})

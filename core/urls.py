@@ -6,18 +6,16 @@ from .views import admin_usuarios, admin_bodega, ventas, boleta, ingresar
 from .views import misdatos, miscompras, salir, carrito, ficha
 from .views import cambiar_estado_boleta, poblar
 from .views import obtener_productos, eliminar_producto_en_bodega, premio, eliminar_producto_en_carrito, agregar_producto_al_carrito
-from .views import mantenedor_usuarios
 
 urlpatterns = [
     path('', index, name='index'),
     path('registrarme', registrarme, name='registrarme'),
     path('nosotros', nosotros, name='nosotros'),
-    path('admin_usuarios/<accion>/<id>', mantenedor_usuarios, name='mantenedor_usuarios'),
+    path('admin_usuarios/', admin_usuarios, name='admin_usuarios'),
     #path('admin_productos/<accion>/<producto_id>', admin_productos, name='admin_productos'),
     path('admin_productos/<accion>/<id>', admin_productos, name='admin_productos'),
 
     #path('eliminar_producto/<pk>', eliminar_producto, name='eliminar_producto'),
-    path('admin_usuarios', admin_usuarios, name='admin_usuarios'),
     
     path('admin_bodega', admin_bodega, name='admin_bodega'),
     path('obtener_productos', obtener_productos, name='obtener_productos'),
