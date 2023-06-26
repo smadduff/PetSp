@@ -58,10 +58,6 @@ th {
     text-overflow: ellipsis; /* Agrega puntos suspensivos (...) */
 }
 
-.index-card-footer {
-    background-color: transparent;
-    border-top: none;
-}
 
 #admin-producto-imagen {
     max-width: 350px;
