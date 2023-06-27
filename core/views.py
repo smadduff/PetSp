@@ -442,3 +442,15 @@ def admin_usuarios(request):
     print(perfiles)  # Add this print statement
 
     return render(request, 'core/admin_usuarios.html', {'perfiles': perfiles})
+
+
+
+
+import requests
+
+def api(request):
+    response = requests.get('https://fakestoreapi.com/products')
+    data = response.json()
+    context = {'data': data}
+    return render(request, 'core/api.html', context)
+
