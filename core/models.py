@@ -72,7 +72,7 @@ class Perfil(models.Model):
         null=False,
         verbose_name='Tipo de usuario'
     )
-    rut = models.CharField(max_length=15, blank=False, null=False, verbose_name='RUT')
+    rut = models.CharField(max_length=20, blank=False, null=False, verbose_name='RUT')
     direccion = models.CharField(max_length=400, blank=False, null=False, verbose_name='Dirección')
     subscrito = models.BooleanField(blank=False, null=False, verbose_name='Subscrito')
     imagen = models.ImageField(upload_to='perfiles/', blank=False, null=False, verbose_name='Imagen')

@@ -92,7 +92,7 @@
 
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'misdatos' %}"> Mis datos </a></li>
+                    <li><a class="dropdown-item" href="{% url 'mis_datos' %}"> Mis datos </a></li>
                     {% if not user.is_staff and not user.is_superuser %}
                       <li><a class="dropdown-item" href="{% url 'miscompras' %}"> Mis compras </a></li>
                     {% endif %}
