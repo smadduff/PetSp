@@ -1,67 +1,99 @@
-{% extends 'core/base.html' %} {% load static %} {% block content %}
+{% extends 'core/base.html' %}
 
-<h1 class="text-danger">Mis datos</h1>
-<form class="text-start p-4" id="form" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="hidden" name="perfil_form">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12">
-            {{ form.usuario.label_tag }}
-            {{ form.usuario }}
-            {{ form.first_name.label_tag }}
-            {{ form.first_name }}
-            {{ form.last_name.label_tag }}
-            {{ form.last_name }}
-            {{ form.direccion.label_tag }}
-            {{ form.direccion }}
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            {{ form.rut.label_tag }}
-            {{ form.rut }}
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
+{% load static %}
+
+{% block content %}
+    
+    <h1 class="text-danger">Mis datos</h1>
+    <form class="text-start p-4" id="form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="perfil_form">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="row mb-3">
+              <label for="inputUsername" class="col-sm-2 col-form-label">Nombre de usuario</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputUsername" name="username" value="{{ user.username }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputFirstName" class="col-sm-2 col-form-label">Nombre</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputFirstName" name="first_name" value="{{ user.first_name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputLastName" class="col-sm-2 col-form-label">Apellidos</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLastName" name="last_name" value="{{ user.last_name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputDireccion" name="direccion" value="{{ direccion }}" required>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputEmail" class="col-sm-2 col-form-label">Correo</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail" name="email" value="{{ user.email }}" required>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputRut" class="col-sm-2 col-form-label">RUT</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputRut" name="rut" value="{{ rut }}" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="col">
-                <div class="mb-3">
-                    {% if form.instance.imagen %}
-                        <img id="registrarme-imagen" src="{{ form.instance.imagen.url }}" class="w-25" alt="Imagen seleccionada">
-                    {% else %}
-                        <img id="registrarme-imagen" src="{% static 'core/images/sin-imagen.png' %}" class="w-25" alt="Imagen seleccionada">
-                    {% endif %}
-                    {{ form.imagen }}
-                </div>
+              <div class="mb-3">
+                {% if imagen %}
+                  <img id="registrarme-imagen" src="{{ imagen.url }}" class="w-25" alt="Imagen seleccionada">
+                {% else %}
+                  <img id="registrarme-imagen" src="{% static 'core/images/sin-imagen.png' %}" class="w-25" alt="Imagen seleccionada">
+                {% endif %}
+                {{ form.imagen }}
+              </div>
             </div>
             {% if form.errors %}
-                <br>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ form.errors }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+              <br>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ form.errors }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
             {% endif %}
+          </div>
         </div>
-    </div>
-    <div class="row w-25 justify-content-center align-items-center">
-        <div class="col mt-2 mb-3">
-            <button type="submit" class="btn btn-dark ancho-150px"> Guardar </button>
-            <button type="reset" class="btn btn-dark ancho-150px"> Limpiar </button>
+        <div class="row w-25 justify-content-center align-items-center">
+            <div class="col mt-2 mb-3">
+              <button type="submit" class="btn btn-dark ancho-150px"> Guardar </button>
+              <button type="reset" class="btn btn-dark ancho-150px"> Limpiar </button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<h1 class="text-danger">Cambiar Contraseña</h1>
-<form method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="password_form">
-    {{ password_form.as_p }}
-    <button type="submit" class="btn btn-dark ancho-150px"> Cambiar Contraseña </button>
-</form>
-
-{% if messages %}
-    {% for message in messages %}
+    <h1 class="text-danger">Cambiar Contraseña</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="password_form">
+        {{ password_form.as_p }}
+        <button type="submit" class="btn btn-dark ancho-150px"> Cambiar Contraseña </button>
+    </form>
+    
+    {% if messages %}
+      {% for message in messages %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    {% endfor %}
-{% endif %} {% endblock content %} {% block script %}
-<script src="{% static 'core/js/mis-datos.js' %}"></script>
+      {% endfor %}
+    {% endif %}
+
+{% endblock content %}
+
+{% block script %}
+  <script src="{% static 'core/js/mis-datos.js' %}"></script>
 {% endblock script %}

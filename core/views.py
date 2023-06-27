@@ -57,28 +57,12 @@ def registrarme(request):
 
 @login_required(login_url='ingresar')
 def mis_datos(request):
-    usuario = request.user
-    perfil = usuario.perfil
-
-    initial_values = {
-        'usuario:': perfil.usuario,
-        'tipo_usuario': perfil.tipo_usuario,
-        'username': usuario.username,
-        'first_name': usuario.first_name,
-        'last_name': usuario.last_name,
-        'email': usuario.email,
-        'rut': perfil.rut,
-        'direccion': perfil.direccion,
-        'subscrito': perfil.subscrito,
-        'imagen': perfil.imagen,
-    }
-
-    form = PerfilForm(instance=perfil, initial=initial_values)
+    form = ActualizacionClienteForm(instance=request.user)
     password_form = PasswordChangeForm(request.user)
 
     if request.method == 'POST':
         if 'perfil_form' in request.POST:
-            form = PerfilForm(request.POST, request.FILES, instance=perfil)
+            form = ActualizacionClienteForm(request.POST, request.FILES, instance=request.user)
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Tu perfil ha sido actualizado.')
@@ -91,7 +75,11 @@ def mis_datos(request):
                 messages.success(request, 'Tu contraseña ha sido actualizada correctamente.')
                 return redirect('mis_datos')
 
-    return render(request, "core/mis_datos.html", {'form': form, 'password_form': password_form, 'usuario': usuario})
+    rut = request.user.perfil.rut  # Obtén el valor del rut del usuario logueado
+    direccion = request.user.perfil.direccion  # Obtén el valor de la dirección del usuario logueado
+    imagen = request.user.perfil.imagen  # Obtén la imagen del usuario logueado
+
+    return render(request, "core/mis_datos.html", {'form': form, 'password_form': password_form, 'user': request.user, 'rut': rut, 'direccion': direccion, 'imagen': imagen})
 
 def nosotros(request):
     return render(request, 'core/nosotros.html')
