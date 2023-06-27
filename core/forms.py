@@ -38,17 +38,24 @@ class ActualizacionClienteForm(ModelForm):
     subscrito = forms.BooleanField(required=False, label='Subscrito', widget=forms.CheckboxInput(attrs=form_check))
     imagen = forms.CharField(required=False, label='Imagen', widget=forms.FileInput(attrs=form_file))
 
-class PerfilForm(ModelForm):
+from django import forms
+from .models import Perfil
+
+
+class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
-        fields = '__all__'
+        fields = ['tipo_usuario', 'rut', 'direccion', 'subscrito', 'imagen']
+        labels = {
+            'tipo_usuario': 'Tipo de usuario',
+            'rut': 'RUT',
+            'direccion': 'Dirección',
+            'subscrito': 'Subscrito',
+            'imagen': 'Imagen',
+        }
         widgets = {
-            'usuario': forms.Select(attrs=form_select),
-            'tipo_usuario': forms.Select(attrs=form_select),
-            'rut': forms.TextInput(attrs=form_control),
-            'direccion': forms.Textarea(attrs=form_text_area),
-            'subscrito': forms.CheckboxInput(),
-            'imagen': forms.FileInput(attrs=form_file),
+            'subscrito': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'imagen': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
 
 

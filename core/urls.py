@@ -11,7 +11,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('registrarme', registrarme, name='registrarme'),
     path('nosotros', nosotros, name='nosotros'),
-    path('admin_usuarios/', admin_usuarios, name='admin_usuarios'),
+    path('admin_usuarios/<accion>/<id>', admin_usuarios, name='admin_usuarios'),
     #path('admin_productos/<accion>/<producto_id>', admin_productos, name='admin_productos'),
     path('admin_productos/<accion>/<id>', admin_productos, name='admin_productos'),
 

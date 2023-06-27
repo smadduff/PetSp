@@ -416,24 +416,6 @@ def poblar(request):
     poblar_bd()
     return redirect(index)
 
-
-
-def admin_usuarios(request):
-    if request.method == 'POST':
-        form = PerfilForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-    else:
-        form = PerfilForm()
-
-    perfiles = Perfil.objects.all()
-    print(perfiles)  # Add this print statement
-
-    return render(request, 'core/admin_usuarios.html', {'perfiles': perfiles})
-
-
-
-
 import requests
 
 def api(request):
@@ -442,3 +424,45 @@ def api(request):
     context = {'data': data}
     return render(request, 'core/api.html', context)
 
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from .forms import PerfilForm
+
+
+def admin_usuarios(request, accion, id):
+    if request.method == 'POST':
+        if accion == 'crear':
+            form = PerfilForm(request.POST, request.FILES)
+        elif accion == 'actualizar':
+            perfil = Perfil.objects.get(id=id)
+            form = PerfilForm(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            if accion == 'crear':  # Add this condition to assign the current user only when creating a new profile
+                perfil.usuario = request.user
+            perfil.save()
+            form = PerfilForm(instance=perfil)
+            messages.success(request, f'El perfil "{str(perfil)}" se logró {accion} correctamente')
+            return redirect('admin_usuarios', 'actualizar', perfil.id)
+        else:
+            messages.error(request, f'No se pudo {accion} el perfil, pues el formulario no pasó las validaciones básicas')
+            return redirect('admin_usuarios', 'actualizar', id)
+
+    if request.method == 'GET':
+        if accion == 'crear':
+            form = PerfilForm()
+        elif accion == 'actualizar':
+            perfil = Perfil.objects.get(id=id)
+            form = PerfilForm(instance=perfil)
+        elif accion == 'eliminar':
+            messages.success(request, eliminar_registro(Perfil, id))
+            return redirect('admin_usuarios', 'crear', '0')
+
+    perfiles = Perfil.objects.all()
+
+    datos = {
+        'form': form,
+        'perfiles': perfiles
+    }
+    return render(request, 'core/admin_usuarios.html', datos)
