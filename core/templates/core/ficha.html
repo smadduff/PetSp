@@ -3,45 +3,30 @@
 {% load custom_filters %}
 
 {% block content %}
-
-    <h1>Ficha de producto</h1>
-
-    <form method="post" id="formulario-ficha">
-
-        {% csrf_token %}
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12 col-md-4 border border-3">
-                    <img src="/media/{{ imagen }}" width="100%">
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <h2 class="fw-bold mb-3">
-                        {{ nombre }}
-                    </h2>
-                    <h4 class="fw-bold">
-                        {{ html_estado|safe }}
-                    </h4>
-                    <h2 class="mb-3">
-                        {{ html_precio|safe }}
-                    </h2>
-                    <h4 class="mb-4">
-                        <div class="mb-3">
-                            Descripción:
-                        </div>
-                        {{ descripcion }}
-                    </h4>
-                    <p>
-                        {{ html_stock|safe }}
-                    </p>
-                    <input type="hidden" id="accion">
-                    <button class="btn btn-primary ancho-150px" value=""> Comprar ahora </button>
-                    <a href="{% url 'agregar_producto_al_carrito' id %}" class="btn btn-secondary ancho-150px"> Agregar al carrito </a>
-                </div>
-            </div>
+<div class="row justify-content-center pt-5">
+    <div class="col-lg-3 col-md-4 col-sm-12">
+        <div class="card" style="width: 100%;">
+            <img src="/media/{{ imagen }}" class="card-img-top" alt="{{ nombre }}">
         </div>
-    </form>
+    </div>
 
+    <div class="col-lg-3 col-md-4 col-sm-12">
+        <div class="card-body">
+            <h1 class="card-title text-left text-dark">{{ nombre }}</h1>
+            <p class="card-text text-left">{{ html_estado|safe }}</p>
+            <h4 class="card-title text-left">{{ html_precio|safe }}</h4>
+            <p class="card-text text-left">Descripción: </p>
+            <p class="card-text text-left">{{ descripcion }}</p>
+            <p class="card-text text-left">{{ html_stock|safe }}</p>
+            <form method="post" id="formulario-ficha" class="text-center">
+                {% csrf_token %}
+                <input type="hidden" id="accion">
+                <button class="btn btn-danger" value="">Comprar ahora</button>
+                <a href="{% url 'agregar_producto_al_carrito' id %}" class="btn btn-secondary">Agregar al carrito</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 {% block script %}

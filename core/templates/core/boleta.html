@@ -4,13 +4,13 @@
 
 {% block content %}
     
-    <h1>Boleta N° {{ boleta.nro_boleta }}</h1>
+    <h1 class="text-danger pt-5">Boleta N° {{ boleta.nro_boleta }}</h1>
     
     <div>
         Venta: {{ boleta.fecha_venta|formatear_fecha }} | Despacho: {{ boleta.fecha_despacho|formatear_fecha }} | Entrega: {{ boleta.fecha_entrega|formatear_fecha }}
     </div>
     
-    <table id="tabla-principal" class="table table-hover">
+    <table id="tabla-principal" class="table table-hover pt-5">
         <thead>
             <tr>
                 <th> Categoría </th>
@@ -44,8 +44,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="fw-bold"> Precio sin IVA </td>
-                <td class="fw-bold text-end"> {{ boleta.monto_sin_iva|formatear_dinero }} </td>
+                <td class="fw-bold pt-5"> Precio sin IVA </td>
+                <td class="fw-bold pt-5 text-end "> {{ boleta.monto_sin_iva|formatear_dinero }} </td>
             </tr>
             <tr>
                 <td></td>
@@ -67,6 +67,7 @@
                 <td class="fw-bold"> Total a pagar </td>
                 <td class="fw-bold text-end"> {{ boleta.total_a_pagar|formatear_dinero }} </td>
             </tr>
+        
         </tfoot>
         </tbody>
     </table>

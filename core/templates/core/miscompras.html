@@ -4,7 +4,7 @@
 
 {% block content %}
     
-    <h1>Mis compras anteriores</h1>
+    <h1 class="text-danger">Mis compras anteriores</h1>
     
     <table id="tabla-principal" class="table table-hover">
         <thead>
@@ -32,7 +32,7 @@
                     <td> {{ boleta.total_a_pagar }} </td>
                     <td> {{ boleta.estado }} </td>
                     <td>
-                        <a href="{% url 'boleta' boleta.nro_boleta %}" class="btn btn-sm btn-primary">Detalle</a>
+                        <a href="{% url 'boleta' boleta.nro_boleta %}" class="btn btn-sm btn-dark">Detalle</a>
                     </td>
                 </tr>
             {% endfor %}

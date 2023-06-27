@@ -3,28 +3,33 @@
 {% load custom_filters %}
 
 {% block content %}
-  
+
   {% if productos %}
     <div class="container-fluid">
       <div class="row">
         {% for producto in productos %}
-          <div class="card col-sm-12 col-md-6 col-lg-3 col-xl-2 border border-1 m-2 pt-3 pb-4" style="width: 15.2rem;">
+          <div class="card col-sm-12 col-md-6 col-lg-3 m-2" style="width: 26rem;">
+            {% if not user.is_authenticated or user.is_staff or user.is_superuser%}
+              
+              
+            <a class="nav-link" href="{% url 'ingresar' %}">
+ 
+            {% endif %}
+            {% if user.is_authenticated and not user.is_staff and not user.is_superuser %}
             <a href="{% url 'ficha' producto.id %}" class="link-bloque">
-              <img src="/media/{{ producto.imagen }}" class="index-producto-imagen" class="card-img-top" alt="">
+              {% endif %}
               <div class="card-body">
-                <h6 class="card-title">
+                <img src="/media/{{ producto.imagen }}" class="card-img-top" alt="{{ producto.nombre }}" style="width: 200px; height: 200px; object-fit: cover;">
+                <h5 class="card-title mt-3">
                   {{ producto.nombre }}
-                </h6>
-                <h7 class="card-title"> 
+                </h5>
+                <p class="card-text text-success"> 
                   {{ producto.html_estado|safe }}
-                  <br>
-                  {{ producto.html_precio|safe }}
-                </h7>
-                <p class="card-text index-producto-descripcion" data-toggle="tooltip" title="{{ descripcion_producto }}"> 
-                  {{ producto.descripcion }}
-                  <br>
-                  {{ producto.html_stock }}
                 </p>
+                <h4 class="card-title">{{ producto.html_precio|safe }}</h4>
+                <p class="card-text">Descripción: </p>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="card-text">{{ producto.html_stock }}</p>
               </div>
             </a>
           </div>

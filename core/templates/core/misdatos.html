@@ -8,6 +8,141 @@
 
 {% block content %}
     
-    <h1>Mis datos</h1>
-    
+    <h1 class="text-danger">Mis datos</h1>
+    <form class="text-start p-4" id="formMisDatos" method="post">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="row mb-3">
+              <label for="inputRut" class="col-sm-2 col-form-label">Rut</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputRut"
+                  name="rut"
+                  placeholder="11.111.111-1"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputNombre" class="col-sm-2 col-form-label"
+                >Nombres</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputNombre"
+                  name="names"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputApellidos" class="col-sm-2 col-form-label"
+                >Apellidos</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputApellidos"
+                  name="last_names"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"
+                >Correo</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="inputEmail3"
+                  name="email"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputDireccion" class="col-sm-2 col-form-label"
+                >Dirección</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputDireccion"
+                  name="address"
+                />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"
+                >Contraseña</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="inputPassword3"
+                  name="password"
+                  placeholder="*********************"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword32" class="col-sm-2 col-form-label"
+                >Repetir Contraseña</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="inputPassword32"
+                  name="password2"
+                  placeholder="*********************"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-10 offset-sm-2">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gridCheck1"
+                  />
+                  <label class="form-check-label" for="gridCheck1">
+                    Deseo suscribirme con un aporte de $3000 mensuales y obtener
+                    un 5% de descuento en mis compras.
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col">
+              <div class="mb-3">
+                <img
+                  id="previewImage"
+                  src="./img/icono-perfil-humano-ilustracion-vectorial-genero_276184-158.avif"
+                  alt="Imagen seleccionada"
+                  class="w-25"
+                />
+                <input class="form-control" type="file" id="formFile" />
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row w-25 justify-content-center align-items-center">
+            <div class="col">
+              <button type="submit" class="btn btn-danger">Guardar</button> 
+              <button type="reset" class="btn btn-secondary">Limpiar</button>
+            </div>
+          </div>
+    </form>
 {% endblock content %}
+{% block script %}
+  <script src="{% static 'core/js/registrarme.js' %}"></script>
+{% endblock script %}
