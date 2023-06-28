@@ -80,7 +80,7 @@
           <td>{{ perfil.usuario.email }}</td>
           <td>{{ perfil.direccion }}</td>
           <td>{{ perfil.subscrito }}</td>
-          <td><img src="{{ perfil.imagen.url }}" alt="Imagen de perfil"></td>
+          <td><img class="w-25" src="{{ perfil.imagen.url }}" alt="Imagen de perfil"></td>
           <td>
             <a href="{% url 'admin_usuarios' 'actualizar' perfil.id %}" class="btn btn-dark btn-sm boton_chico  "> Editar </a>
         </td>
