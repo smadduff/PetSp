@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from .models import Categoria, Producto, Boleta, Carrito, DetalleBoleta, Bodega, Perfil
-from .forms import ProductoForm, BodegaForm, RegistroClienteForm, IngresarForm, ActualizacionClienteForm
+from .forms import ProductoForm, BodegaForm, RegistroClienteForm, IngresarForm, ActualizacionClienteForm, PerfilFormParaMisDatos
 from .zpoblar import poblar_bd
 from django.db.models import ProtectedError
 from django.http import JsonResponse
@@ -58,14 +58,23 @@ def registrarme(request):
 @login_required(login_url='ingresar')
 def mis_datos(request):
     form = ActualizacionClienteForm(instance=request.user)
+    perfil_form = PerfilForm(instance=request.user.perfil)
     password_form = PasswordChangeForm(request.user)
 
     if request.method == 'POST':
         if 'perfil_form' in request.POST:
-            form = ActualizacionClienteForm(request.POST, request.FILES, instance=request.user)
+            perfil_form = PerfilFormParaMisDatos(request.POST, request.FILES, instance=request.user.perfil)  # Usar PerfilFormParaMisDatos en lugar de PerfilForm
+            if perfil_form.is_valid():
+                perfil = perfil_form.save(commit=False)
+                perfil.tipo_usuario = request.user.perfil.tipo_usuario  # Establece el valor de tipo_usuario al original
+                perfil.save()
+                messages.success(request, 'Tu perfil ha sido actualizado.')
+                return redirect('mis_datos')
+        elif 'form' in request.POST:
+            form = ActualizacionClienteForm(request.POST, instance=request.user)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Tu perfil ha sido actualizado.')
+                messages.success(request, 'Tu usuario ha sido actualizado.')
                 return redirect('mis_datos')
         elif 'password_form' in request.POST:
             password_form = PasswordChangeForm(request.user, request.POST)
@@ -79,7 +88,8 @@ def mis_datos(request):
     direccion = request.user.perfil.direccion  # Obtén el valor de la dirección del usuario logueado
     imagen = request.user.perfil.imagen  # Obtén la imagen del usuario logueado
 
-    return render(request, "core/mis_datos.html", {'form': form, 'password_form': password_form, 'user': request.user, 'rut': rut, 'direccion': direccion, 'imagen': imagen})
+    return render(request, "core/mis_datos.html", {'form': form, 'perfil_form': perfil_form, 'password_form': password_form, 'user': request.user, 'rut': rut, 'direccion': direccion, 'imagen': imagen})
+
 
 def nosotros(request):
     return render(request, 'core/nosotros.html')
