@@ -34,13 +34,20 @@
   
     <div class="mt-2 mb-3">
       <input type="submit" class="btn btn-primary" value="Guardar">
-      <a class="btn btn-success" href="{% url 'admin_usuarios' 'crear' '0' %}">Nuevo</a>
+      <a href="{% url 'crear_perfil' %}" class="btn btn-primary">Crear Perfil</a>
       {% if form.instance.id %}
       <a class="btn btn-danger" href="{% url 'admin_usuarios' 'eliminar' form.instance.id %}">Eliminar</a>
       {% endif %}
     </div>
   </form>
-  
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
   
 
   <div class="table-responsive-sm table-responsive-md table-responsive-lg">

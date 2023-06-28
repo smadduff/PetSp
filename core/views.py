@@ -466,3 +466,43 @@ def admin_usuarios(request, accion, id):
         'perfiles': perfiles
     }
     return render(request, 'core/admin_usuarios.html', datos)
+
+
+
+
+from django.shortcuts import render, redirect
+from .forms import RegistroAdminForm
+from .models import Perfil
+
+def crear_perfil(request):
+    form = RegistroAdminForm()
+    if request.method == 'POST':
+        form = RegistroAdminForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)  # Obtener el usuario del formulario sin guardarlo aún
+            tipo_usuario = form.cleaned_data['tipo_usuario']  # Obtener el tipo de usuario del formulario
+            user.save()  # Guardar el usuario en la base de datos
+
+            rut = form.cleaned_data['rut']
+            direccion = form.cleaned_data['direccion']
+            subscrito = form.cleaned_data['subscrito']
+            imagen = form.cleaned_data['imagen']
+            
+            perfil = Perfil.objects.create(
+                usuario=user,
+                tipo_usuario=tipo_usuario, 
+                rut=rut,
+                direccion=direccion,
+                subscrito=subscrito,
+                imagen=imagen
+            )
+            
+            return redirect('ingresar')
+            
+    return render(request, 'core/crear_perfil.html', {'form': form})
+
+from django.utils.crypto import get_random_string
+
+def generate_password(request):
+    password = get_random_string(length=10)
+    return JsonResponse({'password': password})

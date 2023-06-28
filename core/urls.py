@@ -2,7 +2,7 @@ from django.urls import path
 from django.views.generic.base import TemplateView
 from django.contrib.auth import views as auth_views
 from .views import index, registrarme, nosotros, admin_productos
-from .views import admin_usuarios, admin_bodega, ventas, boleta, ingresar,api
+from .views import admin_usuarios, admin_bodega, ventas, boleta, ingresar,api,crear_perfil,generate_password
 from .views import mis_datos, miscompras, salir, carrito, ficha
 from .views import cambiar_estado_boleta, poblar
 from .views import obtener_productos, eliminar_producto_en_bodega, premio, eliminar_producto_en_carrito, agregar_producto_al_carrito
@@ -22,6 +22,9 @@ urlpatterns = [
     path('eliminar_producto_en_bodega/<bodega_id>', eliminar_producto_en_bodega, name='eliminar_producto_en_bodega'),
 
     path('api/', api, name='api'),
+    path('crear_perfil/', crear_perfil, name='crear_perfil'),
+    path('generate_password/', generate_password, name='generate_password'),
+    
     
     path('ventas', ventas, name='ventas'),
     path('boleta/<nro_boleta>', boleta, name='boleta'),

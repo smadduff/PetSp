@@ -137,3 +137,81 @@ class IngresarForm(Form):
     class Meta:
         fields = ['username', 'password']
 
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import Perfil
+from django.utils.crypto import get_random_string
+
+class RegistroAdminForm(UserCreationForm):
+    rut = forms.CharField(
+        max_length=15,
+        required=True,
+        label='RUT',
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    direccion = forms.CharField(
+        max_length=400,
+        required=True,
+        label='Dirección',
+        widget=forms.Textarea(attrs={'class': 'form-control'}),
+    )
+    subscrito = forms.BooleanField(
+        required=False,
+        label='Subscrito',
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    )
+    imagen = forms.CharField(
+        required=True,
+        label='Imagen',
+        widget=forms.FileInput(attrs={'class': 'form-control-file'}),
+    )
+    tipo_usuario = forms.ChoiceField(
+        choices=Perfil.USUARIO_CHOICES,
+        required=True,
+        label='Tipo de usuario',
+        widget=forms.Select(attrs={'class': 'form-select'}),
+    )
+
+    password_generated = forms.CharField(
+        label='Contraseña generada',
+        widget=forms.PasswordInput(render_value=True, attrs={'class': 'form-control', 'readonly': 'readonly'}),
+        required=True,  # No se requiere ingresar valor en este campo
+    )
+
+    def generate_random_password(self):
+        return get_random_string(length=10)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
+        self.fields['first_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['last_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['email'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password1'] = forms.CharField(widget=forms.HiddenInput(), required=False)
+        self.fields['password2'] = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password = self.cleaned_data.get('password_generated')  # Obtener la contraseña generada
+        user.set_password(password)
+
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'rut',
+            'direccion',
+            'subscrito',
+            'imagen',
+            'tipo_usuario',
+            'password_generated',  # Agregar campo para mostrar la contraseña generada
+        ]
