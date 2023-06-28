@@ -186,8 +186,7 @@ class RegistroAdminForm(UserCreationForm):
         self.fields['first_name'].widget.attrs.update({'class': 'form-control'})
         self.fields['last_name'].widget.attrs.update({'class': 'form-control'})
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
-        self.fields['password1'] = forms.CharField(widget=forms.HiddenInput(), required=False)
-        self.fields['password2'] = forms.CharField(widget=forms.HiddenInput(), required=False)
+
 
     def save(self, commit=True):
         user = super().save(commit=False)
