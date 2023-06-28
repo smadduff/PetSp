@@ -35,8 +35,8 @@
     </div>
 
     <div class="mt-2 mb-3">
-      <input type="submit" class="btn btn-primary" value="Guardar">
-      <a class="btn btn-success" href="{% url 'admin_productos' 'crear' '0' %}"> Nuevo </a>
+      <input type="submit" class="btn btn-dark" value="Guardar">
+      <a class="btn btn-dark" href="{% url 'admin_productos' 'crear' '0' %}"> Nuevo </a>
       {% if form.instance.id %}
         <a class="btn btn-danger" href="{% url 'admin_productos' 'eliminar' form.instance.id %}"> Eliminar </a>
       {% endif %}
@@ -84,7 +84,7 @@
                         <img src="/media/{{ producto.imagen }}" class="producto-sm" alt="">
                     </td>
                     <td>
-                        <a href="{% url 'admin_productos' 'actualizar' producto.id %}" class="btn btn-primary btn-sm boton_chico"> Editar </a>
+                        <a href="{% url 'admin_productos' 'actualizar' producto.id %}" class="btn btn-dark btn-sm boton_chico"> Editar </a>
                     </td>
                     <td>
                         <form method="delete">
