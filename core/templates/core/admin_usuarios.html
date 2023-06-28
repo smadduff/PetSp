@@ -33,8 +33,8 @@
     </div>
   
     <div class="mt-2 mb-3">
-      <input type="submit" class="btn btn-primary" value="Guardar">
-      <a href="{% url 'crear_perfil' %}" class="btn btn-primary">Crear Perfil</a>
+      <input type="submit" class="btn btn-dark" value="Guardar">
+      <a href="{% url 'crear_perfil' %}" class="btn btn-dark">Crear Perfil</a>
       {% if form.instance.id %}
       <a class="btn btn-danger" href="{% url 'admin_usuarios' 'eliminar' form.instance.id %}">Eliminar</a>
       {% endif %}
@@ -44,7 +44,7 @@
   {% for message in messages %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   {% endfor %}
 {% endif %}
@@ -82,7 +82,7 @@
           <td>{{ perfil.subscrito }}</td>
           <td><img src="{{ perfil.imagen.url }}" alt="Imagen de perfil"></td>
           <td>
-            <a href="{% url 'admin_usuarios' 'actualizar' perfil.id %}" class="btn btn-primary btn-sm boton_chico"> Editar </a>
+            <a href="{% url 'admin_usuarios' 'actualizar' perfil.id %}" class="btn btn-dark btn-sm boton_chico  "> Editar </a>
         </td>
           <td>
             <form method="delete">

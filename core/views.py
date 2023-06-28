@@ -507,7 +507,7 @@ def crear_perfil(request):
                 imagen=imagen
             )
             
-            return redirect('ingresar')
+            return redirect('admin_usuarios', 'crear', '0')
             
     return render(request, 'core/crear_perfil.html', {'form': form})
 

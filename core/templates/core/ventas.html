@@ -37,15 +37,15 @@
                     <td> {{ boleta.total_a_pagar }} </td>
                     <td> {{ boleta.estado }} </td>
                     <td>
-                        <a href="{% url 'boleta' boleta.nro_boleta %}" class="btn btn-sm btn-primary">Detalle</a>
+                        <a href="{% url 'boleta' boleta.nro_boleta %}" class="btn btn-sm btn-dark">Detalle</a>
                     </td>
                     <td>
                         <span>
                             <div class="btn-group">
-                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Anulado' %}" class="btn btn-sm btn-danger">Anular</a>
-                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Vendido' %}" class="btn btn-sm btn-success">Vender</a>
-                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Despachado' %}" class="btn btn-sm btn-primary">Despachar</a>
-                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Entregado' %}" class="btn btn-sm btn-secondary">Entregar</a>
+                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Anulado' %}" class="btn btn-sm btn-danger">Anular</a>&nbsp 
+                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Vendido' %}" class="btn btn-sm btn-dark">Vender</a>&nbsp 
+                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Despachado' %}" class="btn btn-sm btn-danger">Despachar</a>&nbsp 
+                                <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Entregado' %}" class="btn btn-sm btn-dark">Entregar</a>&nbsp 
                             </div>
                         </span>
                     </td>
