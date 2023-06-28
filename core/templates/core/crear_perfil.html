@@ -3,7 +3,7 @@
 
 {% block content %}
     
-  <h1 class="text-danger pt-5"> Crear perfil </h1>
+  <h1 class="text-danger pt-5">Crear perfil</h1>
 
   <form method="POST" enctype="multipart/form-data" id="form">
 
@@ -13,14 +13,16 @@
       <div class="col-sm-12 col-md-6">
         <div class="form-row">
           {% for field in form %}
-            <div class="form-group row mb-2">
-              <label for="{{ field.id_for_label }}" class="col-sm-5 col-form-label">
-                {{ field.label }}
-              </label>
-              <div class="col-sm-7">
-                {{ field }}
+            {% if field.name != 'password1' and field.name != 'password2' %}
+              <div class="form-group row mb-2">
+                <label for="{{ field.id_for_label }}" class="col-sm-5 col-form-label">
+                  {{ field.label }}
+                </label>
+                <div class="col-sm-7">
+                  {{ field }}
+                </div>
               </div>
-            </div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -45,8 +47,8 @@
     </div>
 
     <div class="mt-2 mb-3">
-      <button type="submit" class="btn btn-dark ancho-150px"> Registrar usuario </button>
-      <button type="reset" class="btn btn-dark ancho-150px"> Limpiar </button>
+      <button type="submit" class="btn btn-dark ancho-150px">Registrar usuario</button>
+      <button type="reset" class="btn btn-dark ancho-150px">Limpiar</button>
       <button id="generate-password-btn" type="button" class="btn btn-danger">Generate Random Password</button>
     </div>
 
@@ -76,8 +78,4 @@
     });
   </script>
   
-  
-
-
-
 {% endblock content %}
