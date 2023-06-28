@@ -73,6 +73,9 @@
               {% endif %}
 
               {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link text-light text-light" aria-current="page" href="{% url 'api' %}"> Premio </a>
+              </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
                       aria-expanded="false" href="{% url 'ingresar' %}">
@@ -225,7 +228,7 @@
     
     <footer>
       <hr>
-      <div class="d-flex justify-content-center"><a href="{% url 'api' %}" class="btn btn-danger">Api</a> &nbsp &nbsp<a href="{% url 'poblar' %}" class="btn btn-danger">POBLAR BASE DE DATOS</a> </div>
+      <div class="d-flex justify-content-center"><a href="{% url 'poblar' %}" class="btn btn-danger">POBLAR BASE DE DATOS</a> </div>
       <div class="d-flex justify-content-center"></div>
       <div class="position-relative">
         

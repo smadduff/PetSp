@@ -33,13 +33,8 @@ class ActualizacionClienteForm(ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
 
-    rut = forms.CharField(max_length=15, required=False, label='RUT', widget=forms.TextInput(attrs=form_control))
-    direccion = forms.CharField(max_length=400, required=False, label='Dirección', widget=forms.Textarea(attrs=form_text_area))
-    subscrito = forms.BooleanField(required=False, label='Subscrito', widget=forms.CheckboxInput(attrs=form_check))
-    imagen = forms.CharField(required=False, label='Imagen', widget=forms.FileInput(attrs=form_file))
 
-from django import forms
-from .models import Perfil
+
 
 
 class PerfilForm(forms.ModelForm):
@@ -58,7 +53,9 @@ class PerfilForm(forms.ModelForm):
             'imagen': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
 
-
+class PerfilFormParaMisDatos(PerfilForm):
+    class Meta(PerfilForm.Meta):  # Hereda de Meta en PerfilForm
+        fields = ['rut', 'direccion', 'subscrito', 'imagen']  # se removió 'tipo_usuario'
 
 class BodegaForm(forms.Form):
 
