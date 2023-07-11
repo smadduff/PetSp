@@ -235,8 +235,7 @@ def ingresar(request):
 
 
 def miscompras(request):
-
-    usuario = User.objects.get(username='eolsen')
+    usuario = request.user
     perfil = Perfil.objects.get(usuario=usuario)
 
     boletas = Boleta.objects.filter(cliente=perfil)
