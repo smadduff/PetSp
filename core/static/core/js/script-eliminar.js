@@ -1,35 +1,15 @@
-function eliminar_producto_en_carrito(carrito_id) {
-    console.log('Eliminar producto en carrito');
-    // Obtener el token CSRF de la cookie
-    const csrftoken = getCookie('csrftoken');
+function eliminar_producto_en_carrito(carrito_id, event) {
+  event.preventDefault(); // Detiene la propagación del evento a otros manejadores.
   
-    // Enviar una solicitud AJAX para eliminar el producto del carrito
-    $.ajax({
+  $.ajax({
       url: '/eliminar_producto_en_carrito/' + carrito_id,
-      type: 'POST',
-      headers: {
-        'X-CSRFToken': csrftoken
-      },
-      success: function() {
-        // Actualizar la página después de eliminar el producto del carrito
-        location.reload();
+      type: 'DELETE',
+      success: function(response) {
+          if (response.success) {
+              // Aquí puedes actualizar el contenido del modal.
+              // Por ejemplo, puedes eliminar la fila del producto en la tabla:
+              $('#producto-' + carrito_id).remove();
+          }
       }
-    });
-  }
-  
-  // Función para obtener el valor de una cookie por su nombre
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        // Si la cookie tiene el nombre buscado, obtener su valor
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
+  });
+}

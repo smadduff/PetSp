@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from .tools import eliminar_registro, verificar_eliminar_registro
 from core.templatetags.custom_filters import formatear_dinero, formatear_numero
-from django.http import HttpResponse
+from django.http import JsonResponse
 from .models import Perfil
 from .forms import PerfilForm
 from django.contrib.auth.decorators import login_required
@@ -283,7 +283,7 @@ def eliminar_producto_en_carrito(request, carrito_id):
 
     Carrito.objects.get(id=carrito_id).delete()
 
-    return HttpResponse()
+    return JsonResponse({'success': True})
 
 
 def agregar_producto_al_carrito(request, producto_id):

@@ -169,7 +169,7 @@
         <tbody>
           
           {% for item in detalle_carrito %}
-          <tr>
+          <tr id="producto-{{ item.id }}">
             <td>{{ item.id }}</td>
             <td> {{ item.producto.categoria.nombre }} </td>
             <td> {{ item.producto.nombre }} </td>
@@ -179,11 +179,13 @@
             <td> {{ item.descuento_total|formatear_porcentaje }} </td>
             <td> {{ item.descuentos|formatear_dinero }} </td>
             <td> {{ item.precio_a_pagar|formatear_dinero }} </td>
-            <td> <div class="btn-group">
-              <a href="{% url 'ficha' item.producto.id %}" class="btn btn-sm btn-primary"> Detalle </a> 
-              <a href="#" onclick="eliminar_producto_en_carrito({{ item.id }})" class="btn btn-sm btn-danger"> Eliminar </a> 
-          </div></td>
-          </tr>
+            <td> 
+                <div class="btn-group">
+                    <a href="{% url 'ficha' item.producto.id %}" class="btn btn-sm btn-primary"> Detalle </a> 
+                    <a href="javascript:void(0)" onclick="eliminar_producto_en_carrito({{ item.id }}, event)" class="btn btn-sm btn-danger"> Eliminar </a> 
+                </div>
+            </td>
+        </tr>
           {% endfor %}
         </tbody>
       </table>
