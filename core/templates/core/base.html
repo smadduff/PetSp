@@ -49,7 +49,9 @@
               <li class="nav-item">
                 <a class="nav-link text-light text-light" aria-current="page" href="{% url 'nosotros' %}"> Nosotros </a>
               </li>
-
+              <li class="nav-item">
+                <a class="nav-link text-light text-light" aria-current="page" href="{% url 'api' %}"> Premio </a>
+              </li>
               {% if user.is_authenticated and user.is_staff or user.is_authenticated and user.is_superuser %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" 
@@ -73,9 +75,7 @@
               {% endif %}
 
               {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link text-light text-light" aria-current="page" href="{% url 'api' %}"> Premio </a>
-              </li>
+              
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
                       aria-expanded="false" href="{% url 'ingresar' %}">
