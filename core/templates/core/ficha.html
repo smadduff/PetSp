@@ -21,8 +21,15 @@
             <form method="post" id="formulario-ficha" class="text-center">
                 {% csrf_token %}
                 <input type="hidden" id="accion">
-                <button class="btn btn-danger" value="">Comprar ahora</button>
-                <a href="{% url 'agregar_producto_al_carrito' id %}" class="btn btn-secondary">Agregar al carrito</a>
+                {% if not user.is_authenticated or user.is_staff or user.is_superuser%}
+              
+                <a href="{% url 'ingresar' %}" class="btn btn-secondary">Iniciar sesión para comprar</a>
+ 
+            {% endif %}
+                {% if user.is_authenticated and not user.is_staff and not user.is_superuser %}
+                    <button class="btn btn-danger" value="">Comprar ahora</button>
+                    <a href="{% url 'agregar_producto_al_carrito' id %}" class="btn btn-secondary">Agregar al carrito</a>
+                {% endif %}
             </form>
         </div>
     </div>
