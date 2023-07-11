@@ -7,7 +7,7 @@
     <h1 class="text-danger pt-5">Boleta N° {{ boleta.nro_boleta }}</h1>
     
     <div>
-        Venta: {{ boleta.fecha_venta|formatear_fecha }} | Despacho: {{ boleta.fecha_despacho|formatear_fecha }} | Entrega: {{ boleta.fecha_entrega|formatear_fecha }}
+        Venta: {{ boleta.fecha_venta|formatear_fecha }} | Despacho: {{ boleta.fecha_despacho|formatear_fecha }} | Entrega: {{ boleta.fecha_entrega|formatear_fecha }} |{{ boleta.cliente.usuario.first_name}} {{ boleta.cliente.usuario.last_name }}
     </div>
     
     <table id="tabla-principal" class="table table-hover pt-5">
